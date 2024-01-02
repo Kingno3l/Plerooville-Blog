@@ -43,6 +43,9 @@ Route::middleware(['auth', 'role:editor'])->group(function () {
     Route::get('/editor/dashboard', [EditorController::class, 'EditorDashboard'])->name('editor.dashboard');
 });
 
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+
+
 
 
 
