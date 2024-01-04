@@ -4,6 +4,7 @@ use App\Http\Controllers\EditorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,22 @@ Route::middleware(['auth', 'role:editor'])->group(function () {
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+
+
+
+//Admin group middleware
+Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    //Category type controller
+
+    Route::controller(CategoryController::class)->group(function () {
+
+        Route::get('/all/categoty', 'AllCategory')->name('all.category');
+
+    });
+
+    
+});
 
 
 
