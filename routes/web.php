@@ -64,7 +64,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::controller(CategoryController::class)->group(function () {
 
-        Route::get('/all/categoty', 'AllCategory')->name('all.category');
+        Route::get('/all/category', 'AllCategory')->name('all.category');
+        Route::get('/add/category', 'AddCategory')->name('add.category');
+        Route::post('/save/category', 'SaveCategory')->name('save.category');
+        Route::get('/edit/category/{id}', 'EditCategory')->name('edit.category');
+        Route::post('/update/category', 'UpdateCategory')->name('update.category');
+        Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');
+
 
     });
 

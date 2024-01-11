@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('meta_title');
             $table->text('meta_description');
             $table->text('meta_keyword');
-            $table->tinyInteger('navbar_status');
-            $table->tinyInteger('status');
+            $table->tinyInteger('navbar_status')->default('0');
+            $table->tinyInteger('status')->default('0');
             $table->integer('created_by');
             $table->timestamps();
         });

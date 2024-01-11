@@ -10,4 +10,10 @@ class Category extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function createdByUser()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+
 }

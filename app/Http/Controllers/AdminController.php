@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
+
 use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
@@ -49,12 +51,20 @@ class AdminController extends Controller
         $data->username = $request->username;
 
         if ($request->file('image')) {
+            // Delete the existing image
+            $existingImage = 'upload/admin_images/' . $data->photo;
+            if (File::exists(public_path($existingImage))) {
+                File::delete(public_path($existingImage));
+            }
+
+            // Upload the new image
             $file = $request->file('image');
-            unlink(public_path('upload/admin_images' . $data->image));
             $filename = date("YmdHi") . $file->getClientOriginalName();
             $file->move(public_path('upload/admin_images'), $filename);
-            $data['photo'] = $filename;
+            $data->photo = $filename; // Use -> instead of square brackets
+
         }
+
 
         $data->save();
 
