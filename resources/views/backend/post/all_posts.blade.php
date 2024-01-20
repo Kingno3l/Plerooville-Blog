@@ -26,7 +26,6 @@
                                         <th>Meta Title</th>
                                         <th>Meta Description</th>
                                         <th>Meta Keyword</th>
-                                        <th>Navbar Status</th>
                                         <th>Status</th>
                                         <th>Created By</th>
                                         <th>Image</th>
@@ -35,7 +34,7 @@
                                     </tr>
                                 </thead>
 
-                                {{-- <tbody>
+                                <tbody>
                                     @foreach ($posts as $key => $post)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
@@ -47,23 +46,23 @@
                                             <td>{{ $post->meta_keyword }}</td>
                                             <td>{{ $post->status }}</td>
                                             
-                                            <td> {{ $category->created_by }} </td>
+                                            <td> {{ $post->created_by }} </td>
                                             <td>
-                                                @if (!empty($category->image) && file_exists(public_path('uploads/category/' . $category->image)))
-                                                    <img src="{{ url('uploads/category/' . $category->image) }}"
-                                                        alt="Category Image">
+                                                @if (!empty($post->image) && file_exists(public_path('uploads/post/' . $post->image)))
+                                                    <img src="{{ url('uploads/post/' . $post->image) }}"
+                                                        alt="Post Image">
                                                 @else
                                                     <img src="{{ url('upload/no_image.jpg') }}" alt="Default Image">
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('edit.category', $category->id)}}" class="btn btn-inverse-warning">Edit</a>
-                                                <a href="{{ route('delete.category', $category->id)}}" class="btn btn-inverse-danger" id="delete">Delete</a>
+                                                <a href="{{ route('edit.post', $post->id)}}" class="btn btn-inverse-warning">Edit</a>
+                                                <a href="{{ route('delete.post', $post->id)}}" class="btn btn-inverse-danger" id="delete">Delete</a>
                                             </td>
 
                                         </tr>
                                     @endforeach
-                                </tbody> --}}
+                                </tbody>
                             </table>
                         </div>
                     </div>

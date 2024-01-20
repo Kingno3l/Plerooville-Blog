@@ -24,7 +24,9 @@ class PostController extends Controller
 
     public function AllPost()
     {
-        return view('backend.post.all_posts');
+        // return view('backend.post.all_posts');
+        $posts = Post::latest()->get();
+        return view('backend.post.all_posts', compact('posts'));
     }
 
     public function SavePost(Request $request)
