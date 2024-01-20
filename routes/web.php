@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/edit/category/{id}', 'EditCategory')->name('edit.category');
         Route::post('/update/category', 'UpdateCategory')->name('update.category');
         Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');
+
+
+    });
+
+    //Post type controller
+
+    Route::controller(PostController::class)->group(function () {
+
+        Route::get('/all/post', 'AllPost')->name('all.post');
+        Route::get('/add/post', 'AddPost')->name('add.post');
+        Route::post('/save/post', 'SavePost')->name('save.post');
+        Route::get('/edit/post/{id}', 'EditPost')->name('edit.post');
+        Route::post('/update/post', 'UpdatePost')->name('update.post');
+        Route::get('/delete/post/{id}', 'DeletePost')->name('delete.post');
 
 
     });
