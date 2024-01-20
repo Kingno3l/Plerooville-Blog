@@ -9,52 +9,63 @@
                 <div class="card">
                     <div class="card-body">
                         <h6 class="card-title">Edit Category</h6>
-                        <form method="POST" action="{{ route('update.category') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('update.post') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <input type="hidden" name="id" value="{{ $categories->id }}">
-                                    <div class="mb-3">
-                                        <label class="form-label">Category Name</label>
-                                        <input type="text" class="form-control" value="{{ $categories->category_name }}"
-                                            name="category_name" placeholder="Enter city"
-                                            @error('category_name') is-invalid @enderror>
-                                        @error('category_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div><!-- Col -->
 
-                                <div class="col-sm-4">
-                                    <div class="mb-3">
-                                        <label class="form-label">Category Slug</label>
-                                        <input type="text" class="form-control" name="category_slug"
-                                            value="{{ $categories->category_slug }}"
-                                            placeholder="Enter state"@error('category_slug') is-invalid                          @enderror>
-                                        @error('category_slug')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div><!-- Col -->
-
-                                <div class="mb-3 col-sm-4">
-                                    <label for="exampleInputEmail1" class="form-label">Image</label>
-                                    <input class="form-control @error('image') is-invalid @enderror" type="file"
-                                        name="image" id="image">
-                                    {{-- Laravel Blade error handling --}}
-                                    @error('image')
+                                <input type="hidden" name="id" value="{{ $posts->id }}">
+                                <div class="mb-3 col-sm-4" data-select2-id="7">
+                                    <label class="form-label">Select Category</label>
+                                    <select class="js-example-basic-single form-select select2-hidden-accessible"
+                                        name="category_id" data-width="100%" data-select2-id="1" tabindex="-1"
+                                        aria-hidden="true">
+                                        <option value="" disabled selected>Select a Category</option>
+                                        {{-- @foreach ($category as $cat_item)
+                                            <option value="{{ $cat_item->id }}" data-select2-id="3">
+                                                {{ $cat_item->category_name }}</option>
+                                        @endforeach --}}
+                                    </select>
+                                    @error('category_id')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div> <!-- col -->
+                                </div>
+
+                                 <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">Post Name</label>
+                                        <input type="text" class="form-control" value="{{ $posts->post_name }}" name="post_name" placeholder="Enter city"
+                                            @error('post_name') is-invalid @enderror>
+                                        @error('post_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div><!-- Col -->
+
+
+
+
+
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">Post Slug</label>
+                                        <input type="text" value="{{ $posts->post_slug}}" class="form-control"  name="post_slug"
+                                            placeholder="Enter state"@error('post_slug') is-invalid                          @enderror>
+                                        @error('post_slug')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div><!-- Col -->
+
+
 
                             </div><!-- Row -->
                             <div class="row">
                                 <div class="card-body">
                                     <h4 class="card-title">Description</h4>
-                                    <textarea class="form-control  @error('category_description') is-invalid @enderror" name="category_description"
-                                        id="tinymceExample" rows="10">{{ $categories->category_description }}</textarea>
+                                    <textarea class="form-control @error('post_description') is-invalid @enderror" name="post_description"
+                                        id="tinymceExample" rows="10">{{ $posts->post_description }}</textarea>
                                     {{-- Laravel Blade error handling --}}
-                                    @error('category_description')
+                                    @error('post_description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -63,11 +74,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="card-body">
-                                        <h4 class="card-title">Meta Keywords</h4>
-                                        <textarea class="form-control @error('meta_keywords') is-invalid @enderror" name="meta_keywords" id=""
-                                            rows="4">{{ $categories->meta_keywords }}</textarea>
+                                        <h4 class="card-title">Meta Keyword</h4>
+                                        <textarea class="form-control @error('meta_keyword') is-invalid @enderror" name="meta_keyword" id=""
+                                            rows="4">{{ $posts->meta_keyword}}</textarea>
                                         {{-- Laravel Blade error handling --}}
-                                        @error('meta_keywords')
+                                        @error('meta_keyword')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -77,7 +88,7 @@
                                     <div class="card-body">
                                         <h4 class="card-title">Meta Description</h4>
                                         <textarea class="form-control @error('meta_description') is-invalid @enderror" name="meta_description" id=""
-                                            rows="4">{{ $categories->meta_description }}</textarea>
+                                            rows="4">{{ $posts->meta_description}}</textarea>
                                         {{-- Laravel Blade error handling --}}
                                         @error('meta_description')
                                             <span class="text-danger">{{ $message }}</span>
@@ -87,12 +98,11 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label class="form-label">Meta Title</label>
-                                        <input type="text" class="form-control @error('meta_title') is-invalid @enderror"
-                                            name="meta_title" value="{{ $categories->meta_title }}"
-                                            placeholder="Enter meta title">
+                                        <input type="text" value="{{ $posts->meta_title }}" class="form-control @error('meta_title') is-invalid @enderror"
+                                            name="meta_title" placeholder="Enter meta title">
                                         {{-- Laravel Blade error handling --}}
                                         @error('meta_title')
                                             <span class="text-danger">{{ $message }}</span>
@@ -101,27 +111,36 @@
                                 </div><!-- Col -->
 
                                 <div class="col-sm-3">
-                                    <div class="form-check mb-2">
-                                        <input type="checkbox" class="form-check-input" name="navbar_status"
-                                            id="checkCheckedNavbar" value="{{ $categories->navbar_status }}"
-                                            {{ $categories->navbar_status == 1 ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="checkCheckedNavbar">
-                                            Navbar Status
-                                        </label>
+                                    <div class="mb-3">
+                                        <label class="form-label">Youtube iFrame</label>
+                                        <input type="text" class="form-control" value="{{ $posts->post_yt_iframe }}"  name="post_yt_iframe"
+                                            placeholder="Enter state"@error('post_yt_iframe') is-invalid                          @enderror>
+                                        @error('post_yt_iframe')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div><!-- Col -->
 
-                                <div class="col-sm-3">
+                                <div class="mb-3 col-sm-3">
+                                    <label for="exampleInputEmail1" class="form-label">Image</label>
+                                    <input class="form-control @error('image') is-invalid @enderror" type="file"
+                                        name="image" id="image">
+                                    {{-- Laravel Blade error handling --}}
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div> <!-- col -->
+
+                                <div class="col-sm-2">
                                     <div class="form-check mb-2">
                                         <input type="checkbox" class="form-check-input" name="status"
-                                            id="checkCheckedStatus" value="{{ $categories->status }}"
-                                            {{ $categories->status == 1 ? 'checked' : '' }}>
+                                            id="checkCheckedStatus" value="{{ $posts->status }}"
+                                            {{ $posts->status == 1 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="checkCheckedStatus">
                                             Status
                                         </label>
                                     </div>
                                 </div><!-- Col -->
-
 
 
                             </div>
@@ -140,3 +159,4 @@
         </div>
     </div>
 @endsection
+
