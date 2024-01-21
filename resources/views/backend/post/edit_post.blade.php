@@ -15,22 +15,22 @@
 
                                 <input type="hidden" name="id" value="{{ $posts->id }}">
                                 <div class="mb-3 col-sm-4" data-select2-id="7">
-    <label class="form-label">Select Category</label>
-    <select class="js-example-basic-single form-select select2-hidden-accessible"
-        name="category_id" data-width="100%" data-select2-id="1" tabindex="-1"
-        aria-hidden="true">
-        <option value="" disabled>Select a Category</option>
-        @foreach ($categories as $cat_item)
-            <option value="{{ $cat_item->id }}"
-                {{ $cat_item->id == $posts->category_id ? 'selected' : '' }}>
-                {{ $cat_item->category_name }}
-            </option>
-        @endforeach
-    </select>
-    @error('category_id')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
-</div>
+                                    <label class="form-label">Select Category</label>
+                                    <select class="js-example-basic-single form-select select2-hidden-accessible"
+                                        name="category_id" data-width="100%" data-select2-id="1" tabindex="-1"
+                                        aria-hidden="true">
+                                        <option value="" disabled>Select a Category</option>
+                                        @foreach ($categories as $cat_item)
+                                            <option value="{{ $cat_item->id }}"
+                                                {{ $cat_item->id == $posts->category_id ? 'selected' : '' }}>
+                                                {{ $cat_item->category_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
 
                                 <div class="col-sm-4">
                                     <div class="mb-3">

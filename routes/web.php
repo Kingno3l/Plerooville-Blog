@@ -86,6 +86,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //User type controller
     Route::controller(UserController::class)->group(function () {
         Route::get('/all/user', 'AllUser')->name('all.user');
+        Route::get('/edit/user/{id}', 'EditUser')->name('edit.user');
+        Route::get('/delete/user/{id}', 'DeleteUser')->name('delete.user');
+        Route::post('/update/user', 'UpdateUser')->name('update.user');
+        Route::get('/add/user', 'AddUser')->name('add.user');
+        Route::post('/save/user', 'SaveUser')->name('save.user');
     });
 
 

@@ -4,7 +4,7 @@
 
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
-                <a href="{{ route('add.post') }}" class="btn btn-inverse-info">Add Post</a>
+                <a href="{{ route('add.user') }}" class="btn btn-inverse-info">Add User</a>
             </ol>
         </nav>
 
@@ -42,10 +42,10 @@
                                             <td>{{ $user->phone ? $user->phone : 'No Phone Added' }}</td>
                                             <td>{{ $user->role }}</td>
                                             <td>{{ $user->status }}</td>
-                                            {{-- <td>
+                                            <td>
                                                 <a href="{{ route('edit.user', $user->id)}}" class="btn btn-inverse-warning">Edit</a>
                                                 <a href="{{ route('delete.user', $user->id)}}" class="btn btn-inverse-danger" id="delete">Delete</a>
-                                            </td> --}}
+                                            </td>
 
                                         </tr>
                                     @endforeach
