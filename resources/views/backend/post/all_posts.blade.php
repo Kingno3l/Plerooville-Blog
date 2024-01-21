@@ -44,7 +44,7 @@
                                             <td>{{ $post->meta_title }}</td>
                                             <td>{{ $post->meta_description }}</td>
                                             <td>{{ $post->meta_keyword }}</td>
-                                            <td>{{ $post->status }}</td>
+                                            <td>{{ $post->status == '1' ? 'Hidden' : 'Visible'}}</td>
                                             
                                             <td> {{ $post->created_by }} </td>
                                             <td>
