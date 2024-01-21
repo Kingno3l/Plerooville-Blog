@@ -72,7 +72,8 @@ class PostController extends Controller
     public function EditPost($id)
     {
         $posts = Post::findOrFail($id);
-        return view('backend.post.edit_post', compact('posts'));
+        $categories = Category::where('status', '1')->get();
+        return view('backend.post.edit_post', compact('posts', 'categories'));
     }
 
     public function UpdatePost(Request $request)
@@ -80,10 +81,10 @@ class PostController extends Controller
         $post = Post::find($request->id);
 
         $data = $request->validate([
-            // 'category_id' => [
-            //     'required',
-            //     'exists:categories,id', // Ensure the category_id exists in the 'categories' table
-            // ],
+            'category_id' => [
+                'required',
+                'exists:categories,id', // Ensure the category_id exists in the 'categories' table
+            ],
             'post_name' => 'required',
             'post_slug' => 'required',
             'post_description' => 'required',
@@ -96,7 +97,6 @@ class PostController extends Controller
         $post->fill($data);
 
         if ($request->hasFile('image')) {
-
             $destination = 'uploads/post/' . $post->image;
             if (File::exists($destination)) {
                 File::delete($destination);
@@ -107,20 +107,20 @@ class PostController extends Controller
             $file->move('uploads/post', $filename);
             $post->image = $filename;
         }
-        $post->status = $request->has('status') ? '1' : '0';
 
+        $post->status = $request->has('status') ? '1' : '0';
 
         $post->created_by = Auth::id();
         $post->update();
 
-        $notification = array(
+        $notification = [
             'message' => 'Post updated successfully',
             'alert-type' => 'success'
-        );
+        ];
 
         return redirect()->route('all.post')->with($notification);
-
     }
+
 
     public function DeletePost($id)
     {
