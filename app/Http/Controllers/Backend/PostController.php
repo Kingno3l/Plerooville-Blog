@@ -121,4 +121,27 @@ class PostController extends Controller
         return redirect()->route('all.post')->with($notification);
 
     }
+
+    public function DeletePost($id)
+    {
+
+
+        $post = Post::findOrFail($id); // Fetch the category by ID
+
+        $destination = 'uploads/post/' . $post->image;
+        if (File::exists($destination)) {
+            File::delete($destination); // Delete the associated image file
+        }
+
+        $post->delete(); // Delete the post
+
+        $notification = [
+            'message' => 'Post deleted successfully',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+    }
+
+    
 }
