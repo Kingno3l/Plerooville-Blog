@@ -57,18 +57,27 @@
                             </ul>
                         </div>
                     </li>
+
                     <li class="nav-item">
-                        <a href="pages/apps/chat.html" class="nav-link">
-                            <i class="link-icon" data-feather="message-square"></i>
-                            <span class="link-title">Chat</span>
+                        <a class="nav-link" data-bs-toggle="collapse" href="#user" role="button"
+                            aria-expanded="false" aria-controls="user">
+                            <i class="link-icon" data-feather="feather"></i>
+                            <span class="link-title">User</span>
+                            <i class="link-arrow" data-feather="chevron-down"></i>
                         </a>
+                        <div class="collapse" id="user">
+                            <ul class="nav sub-menu">
+                                <li class="nav-item">
+                                    <a href="{{ route('all.user')}}" class="nav-link">All User</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/ui-components/alerts.html" class="nav-link">Alerts</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a href="pages/apps/calendar.html" class="nav-link">
-                            <i class="link-icon" data-feather="calendar"></i>
-                            <span class="link-title">Calendar</span>
-                        </a>
-                    </li>
+                    
                     <li class="nav-item nav-category">Components</li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button"

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,32 +65,30 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //Category type controller
 
     Route::controller(CategoryController::class)->group(function () {
-
         Route::get('/all/category', 'AllCategory')->name('all.category');
         Route::get('/add/category', 'AddCategory')->name('add.category');
         Route::post('/save/category', 'SaveCategory')->name('save.category');
         Route::get('/edit/category/{id}', 'EditCategory')->name('edit.category');
         Route::post('/update/category', 'UpdateCategory')->name('update.category');
         Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');
-
-
     });
 
     //Post type controller
-
     Route::controller(PostController::class)->group(function () {
-
         Route::get('/all/post', 'AllPost')->name('all.post');
         Route::get('/add/post', 'AddPost')->name('add.post');
         Route::post('/save/post', 'SavePost')->name('save.post');
         Route::get('/edit/post/{id}', 'EditPost')->name('edit.post');
         Route::post('/update/post', 'UpdatePost')->name('update.post');
         Route::get('/delete/post/{id}', 'DeletePost')->name('delete.post');
-
-
     });
 
-    
+    //User type controller
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/all/user', 'AllUser')->name('all.user');
+    });
+
+
 });
 
 
