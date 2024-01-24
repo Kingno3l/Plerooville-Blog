@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Str;
+
 
 
 
@@ -45,6 +47,9 @@ class PostController extends Controller
             'meta_title' => 'required',
             'post_yt_iframe' => 'required'
         ]);
+
+        // Generate slug using Str::slug
+        $data['post_slug'] = Str::slug($data['post_slug']); // Update the post_slug in $data
 
         $post = new Post($data);
 
@@ -93,6 +98,9 @@ class PostController extends Controller
             'meta_title' => 'required',
             'post_yt_iframe' => 'required'
         ]);
+        // Generate slug using Str::slug
+        $data['post_slug'] = Str::slug($data['post_slug']); // Update the post_slug in $data
+
 
         $post->fill($data);
 

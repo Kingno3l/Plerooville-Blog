@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 
+use Illuminate\Support\Str;
+
+
 class CategoryController extends Controller
 {
     public function AllCategory(){
@@ -30,6 +33,10 @@ class CategoryController extends Controller
             'meta_description' => 'required',
             'meta_title' => 'required'
         ]);
+
+        // Generate slug using Str::slug
+        $data['category_slug'] = Str::slug($data['category_slug']); // Update the category_slug in $data
+
 
         $category = new Category($data);
 
@@ -71,6 +78,10 @@ class CategoryController extends Controller
             'meta_description' => 'required',
             'meta_title' => 'required'
         ]);
+
+        // Generate slug using Str::slug
+        $data['category_slug'] = Str::slug($data['category_slug']); // Update the category_slug in $data
+
 
         $category->fill($data);
 
